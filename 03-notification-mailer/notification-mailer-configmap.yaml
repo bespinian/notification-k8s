@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notification-mailer-configmap
+  labels:
+    app: notification
+data:
+  MAIL_URL: smtp://xyz@foobar.com
+  TO_ADDRESS: foo@bar.com

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-api-deployment
+  labels:
+    component: notification-api
+    app: notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: notification-api
+  template:
+    metadata:
+      labels:
+        component: notification-api
+    spec:
+      containers:
+        - name: notification-api
+          image: mathiskretz/notification-api
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 2

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-mailer-deployment
+  labels:
+    component: notification-mailer
+    app: notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: notification-mailer
+  template:
+    metadata:
+      labels:
+        component: notification-mailer
+    spec:
+      initContainers:
+        - name: wait-for-rabbit
+          image: alpine
+          command:
+            [
+              "sh",
+              "-c",
+              "for i in $(seq 1 300); do nc -zvw1 notification-mq 5672 && exit 0 || sleep 3; done; exit 1",
+            ]
+      containers:
+        - name: notification-mailer
+          image: mathiskretz/notification-mailer
+          envFrom:
+            - configMapRef:
+                name: notification-mailer-configmap

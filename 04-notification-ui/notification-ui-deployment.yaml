@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-ui-deployment
+  labels:
+    component: notification-ui
+    app: notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: notification-ui
+  template:
+    metadata:
+      labels:
+        component: notification-ui
+    spec:
+      containers:
+        - name: notification-ui
+          image: mathiskretz/notification-ui
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 2

@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: notification-ui-ingress
+  labels:
+    app: notification
+spec:
+  rules:
+    - host: notification.bespinian.io
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: notification-ui
+              servicePort: 80

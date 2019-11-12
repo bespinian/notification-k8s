@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: notification-mq-np
+  labels:
+    app: notification
+spec:
+  podSelector:
+    matchLabels:
+      component: notification-mq
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              component: notification-api
+        - podSelector:
+            matchLabels:
+              component: notification-mailer
+      ports:
+        - protocol: TCP
+          port: 5672
