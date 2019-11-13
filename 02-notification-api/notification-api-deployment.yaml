@@ -18,6 +18,7 @@ spec:
       containers:
         - name: notification-api
           image: mathiskretz/notification-api
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           livenessProbe:
