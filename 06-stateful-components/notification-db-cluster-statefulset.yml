@@ -5,6 +5,10 @@ metadata:
   labels:
     app: notification
 spec:
+  selector:
+    matchLabels:
+      role: mongo
+      environment: test
   serviceName: "notification-db-cluster"
   replicas: 3
   template:
@@ -21,14 +25,12 @@ spec:
             - mongod
             - "--replSet"
             - rs0
-            - "--smallfiles"
-            - "--noprealloc"
             - "--bind_ip"
             - "0.0.0.0"
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: mongo-persistent-storage
+            - name: mongo-cluster-persistent-storage
               mountPath: /data/db
         - name: mongo-sidecar
           image: cvallance/mongo-k8s-sidecar
@@ -37,7 +39,7 @@ spec:
               value: "role=mongo,environment=test"
   volumeClaimTemplates:
     - metadata:
-        name: mongo-persistent-storage
+        name: mongo-cluster-persistent-storage
       spec:
         accessModes:
           - ReadWriteOnce
