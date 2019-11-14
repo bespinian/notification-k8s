@@ -5,6 +5,10 @@ metadata:
   labels:
     app: notification
 spec:
+  tls:
+    - hosts:
+        - notification.bespinian.io
+      secretName: notification-ui-secret
   rules:
     - host: notification.bespinian.io
       http:
