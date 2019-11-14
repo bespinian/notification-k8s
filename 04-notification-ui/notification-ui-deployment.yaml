@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: notification-ui
-          image: mathiskretz/notification-ui:1.0.2
+          image: bespinian/notification-ui:1.0.2
           imagePullPolicy: Always
           ports:
             - containerPort: 80

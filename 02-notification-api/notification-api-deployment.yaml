@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: notification-api
-          image: mathiskretz/notification-api
+          image: bespinian/notification-api
           imagePullPolicy: Always
           ports:
             - containerPort: 3000

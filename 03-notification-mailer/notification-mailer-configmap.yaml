@@ -5,5 +5,5 @@ metadata:
   labels:
     app: notification
 data:
-  MAIL_URL: smtp://xyz@foobar.com
-  TO_ADDRESS: foo@bar.com
+  MAIL_URL: smtp://postmaster@sandbox435c8f1f7696405f910ede5aaf9839a6.mailgun.org:c5cfcf2a20963f83c974db82d3ca50d6@smtp.mailgun.org:587
+  TO_ADDRESS: mathis@bespinian.io

@@ -26,7 +26,7 @@ spec:
             ]
       containers:
         - name: notification-mailer
-          image: mathiskretz/notification-mailer
+          image: bespinian/notification-mailer
           imagePullPolicy: Always
           envFrom:
             - configMapRef:
