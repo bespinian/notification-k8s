@@ -17,19 +17,22 @@ spec:
     spec:
       containers:
         - name: notification-ui
-          image: bespinian/notification-ui:1.0.2
+          image: bespinian/notification-ui:1.0.6
           imagePullPolicy: Always
+          env:
+            - name: API_URL
+              value: http://notification-api
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           livenessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
           readinessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 8080
             initialDelaySeconds: 5
             periodSeconds: 2
