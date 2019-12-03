@@ -17,8 +17,13 @@ spec:
     spec:
       containers:
         - name: notification-api
-          image: bespinian/notification-api
+          image: bespinian/notification-api:latest
           imagePullPolicy: Always
+          env:
+            - name: MQ_URL
+              value: amqp://notification-mq
+            - name: DB_URL
+              value: mongodb://notification-db:27017
           ports:
             - containerPort: 3000
           livenessProbe:
