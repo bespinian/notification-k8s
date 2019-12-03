@@ -26,8 +26,11 @@ spec:
             ]
       containers:
         - name: notification-mailer
-          image: bespinian/notification-mailer
+          image: bespinian/notification-mailer:latest
           imagePullPolicy: Always
+          env:
+            - name: MQ_URL
+              value: amqp://notification-mq
           envFrom:
             - configMapRef:
                 name: notification-mailer-configmap
