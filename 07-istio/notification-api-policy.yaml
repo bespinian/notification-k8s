@@ -1,0 +1,11 @@
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "notification-api-strict"
+  namespace: notification-istio
+spec:
+  targets:
+  - name: notification-api
+  peers:
+  - mtls:
+      mode: STRICT

@@ -1,0 +1,24 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: notification-api-authz-policy
+  namespace: notification-istio
+spec:
+  selector:
+    matchLabels:
+      component: notification-api
+  rules:
+    - from:
+        - source:
+            principals:
+              ["cluster.local/ns/notification-istio/sa/notification-ui-sa"]
+      to:
+        - operation:
+            methods: ["GET"]
+            paths: ["/"]
+        - operation:
+            methods: ["GET", "POST"]
+            paths: ["/notification"]
+        - operation:
+            methods: ["DELETE"]
+            paths: ["/notification/*"]

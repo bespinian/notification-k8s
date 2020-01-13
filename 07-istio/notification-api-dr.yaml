@@ -1,0 +1,10 @@
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "notification-api-istio-client-mtls"
+  namespace: notification-istio
+spec:
+  host: notification-api.notification-istio.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL

@@ -14,7 +14,10 @@ spec:
     metadata:
       labels:
         component: notification-ui
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
+      serviceAccountName: notification-ui-sa
       containers:
         - name: notification-ui
           image: bespinian/notification-ui:1.0.6

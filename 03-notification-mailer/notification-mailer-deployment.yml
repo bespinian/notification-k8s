@@ -15,6 +15,7 @@ spec:
       labels:
         component: notification-mailer
     spec:
+      serviceAccountName: notification-mailer-sa
       initContainers:
         - name: wait-for-rabbit
           image: alpine

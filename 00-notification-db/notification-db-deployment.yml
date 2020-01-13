@@ -15,6 +15,7 @@ spec:
       labels:
         component: notification-db
     spec:
+      serviceAccountName: notification-db-sa
       containers:
         - image: mongo
           name: mongo

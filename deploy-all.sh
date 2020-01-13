@@ -3,4 +3,3 @@ kubectl apply -f 01-notification-mq;
 kubectl apply -f 02-notification-api;
 kubectl apply -f 03-notification-mailer;
 kubectl apply -f 04-notification-ui;
-kubectl apply -f 05-network-policies;

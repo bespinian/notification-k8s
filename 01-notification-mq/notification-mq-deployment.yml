@@ -15,6 +15,7 @@ spec:
       labels:
         component: notification-mq
     spec:
+      serviceAccountName: notification-mq-sa
       containers:
         - image: rabbitmq
           name: rabbitmq
