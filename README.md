@@ -120,3 +120,32 @@ curl https://notification-api:80 --key /etc/certs/key.pem --cert /etc/certs/cert
 ```
 
 Observe that this works.
+
+## Istio AuthorizationPolicy example
+
+Run a shell in an arbitrary pod
+
+```
+kubectl run -it --rm --restart=Never curl --image=appropriate/curl sh
+```
+
+Apply an authorization policy for `notification-api`.
+
+```
+kubectl apply -f 07-istio/notification-api-authz-policy.yaml
+```
+
+Again run a shell in an arbitrary pod
+
+```
+kubectl run -it --rm --restart=Never curl --image=appropriate/curl sh
+```
+
+On the prompt, try
+
+```
+curl notification-api
+curl notification-api/notification
+```
+
+Observe that both requests do not work. Observe that the app's ui still works.
