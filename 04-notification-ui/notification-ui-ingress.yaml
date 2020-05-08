@@ -13,7 +13,7 @@ spec:
     - host: notification.bespinian.io
       http:
         paths:
-          - path: /
+          - path: /*
             backend:
               serviceName: notification-ui
               servicePort: 80

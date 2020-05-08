@@ -21,7 +21,6 @@ spec:
       containers:
         - name: notification-ui
           image: bespinian/notification-ui:1.0.6
-          imagePullPolicy: Always
           env:
             - name: API_URL
               value: http://notification-api

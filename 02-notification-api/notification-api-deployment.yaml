@@ -21,7 +21,6 @@ spec:
       containers:
         - name: notification-api
           image: bespinian/notification-api:latest
-          imagePullPolicy: Always
           env:
             - name: MQ_URL
               value: amqp://notification-mq
