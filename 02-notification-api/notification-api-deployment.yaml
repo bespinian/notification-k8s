@@ -20,7 +20,8 @@ spec:
       serviceAccountName: notification-api-sa
       containers:
         - name: notification-api
-          image: bespinian/notification-api:latest
+          image: bespinian/notification-api:1.0.4
+          imagePullPolicy: Always
           env:
             - name: MQ_URL
               value: amqp://notification-mq
