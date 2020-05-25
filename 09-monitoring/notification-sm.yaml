@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: notification-sm
+  labels:
+    app: application-monitoring
+    component: application-prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+      - notification
+  selector:
+    matchLabels:
+      name: notification-api
+  endpoints:
+    - port: http
+      path: /metrics

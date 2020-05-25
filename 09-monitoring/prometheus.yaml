@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    app: application-monitoring
+    component: application-prometheus
+  name: application-prometheus
+  namespace: application-monitoring
+spec:
+  replicas: 3
+  retention: 2w
+  enableAdminAPI: false
+  serviceAccountName: application-monitoring-prometheus
+  serviceMonitorSelector:
+    matchLabels:
+      component: application-prometheus
+  alerting:
+    alertmanagers:
+      - namespace: application-monitoring
+        name: alertmanager
+        port: web
+  ruleSelector:
+    matchLabels:
+      role: alerting-rules
+      prometheus: application-prometheus

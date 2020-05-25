@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: application-monitoring
+    component: prometheus
+  name: prometheus
+  namespace: application-monitoring
+spec:
+  ports:
+    - name: web
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+  selector:
+    prometheus: application-prometheus
