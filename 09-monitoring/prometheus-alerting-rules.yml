@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: application-prometheus
+    role: alerting-rules
+  name: prometheus-alerting-rules
+spec:
+  groups:
+    - name: ./notification-api.rules
+      rules:
+        - alert: rate(restify_status_codes{status_code="404"}[3m])
+          expr: rate(restify_status_codes{status_code="404"}[3m]) > 0
+          labels:
+            severity: high
+          annotations:
+            title: "notification-api 404"
+            message: "notification-api is being called with invalid paths in last 3 minutes"
+        - alert: rate(restify_status_codes{status_code=~"5.*"}[3m])
+          expr: rate(restify_status_codes{status_code=~"5.*"}[3m]) > 0
+          labels:
+            severity: critical
+          annotations:
+            title: "notification-api errors"
+            message: "notification-api has returned errors in last 3 minutes"

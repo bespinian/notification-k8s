@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: application-monitoring
+    component: application-grafana
+  name: application-grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: application-grafana
+  template:
+    metadata:
+      labels:
+        component: application-grafana
+    spec:
+      containers:
+        - image: grafana/grafana:6.4.4
+          name: grafana
+          env:
+            - name: GF_INSTALL_PLUGINS
+              value: grafana-piechart-panel
+          ports:
+            - containerPort: 3000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-storage
+              readOnly: false
+            - mountPath: /etc/grafana
+              name: grafana-config
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: grafana-datasources
+            - mountPath: /etc/grafana/provisioning/notifiers
+              name: grafana-notifiers
+            - mountPath: /etc/grafana/provisioning/dashboards
+              name: grafana-dashboards
+            - mountPath: /grafana-dashboard-definitions/0/notification-api
+              name: grafana-dash-notification-api
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+      volumes:
+        - emptyDir: {}
+          name: grafana-storage
+        - configMap:
+            name: grafana-datasource-cm
+          name: grafana-datasources
+        - emptyDir: {}
+          name: grafana-notifiers
+        - configMap:
+            name: grafana-dashboard-sources-cm
+          name: grafana-dashboards
+        - configMap:
+            name: grafana-cm
+          name: grafana-config
+        - configMap:
+            name: grafana-dash-notification-api-cm
+          name: grafana-dash-notification-api
