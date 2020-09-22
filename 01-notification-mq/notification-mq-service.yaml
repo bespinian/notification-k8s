@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: notification-mq
   labels:
     name: notification-mq
     app: notification
-  name: notification-mq
 spec:
   ports:
     - name: epmd

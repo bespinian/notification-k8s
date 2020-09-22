@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    component: notification-db
-    app: notification
   name: notification-db-deployment
+  labels:
+    app: notification
+    component: notification-db
 spec:
   replicas: 1
   selector:

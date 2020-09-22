@@ -5,7 +5,7 @@ metadata:
   namespace: notification-istio
 spec:
   targets:
-  - name: notification-api
+    - name: notification-api
   peers:
-  - mtls:
-      mode: STRICT
+    - mtls:
+        mode: STRICT
