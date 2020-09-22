@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    component: notification-mq
-    app: notification
   name: notification-mq-deployment
+  labels:
+    app: notification
+    component: notification-mq
 spec:
   replicas: 1
   selector:

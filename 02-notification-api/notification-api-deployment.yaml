@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   name: notification-api-deployment
   labels:
-    component: notification-api
     app: notification
+    component: notification-api
 spec:
   replicas: 1
   selector:

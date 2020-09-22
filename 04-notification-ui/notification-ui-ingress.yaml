@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: notification-ui-ingress
@@ -13,7 +13,10 @@ spec:
     - host: notification.bespinian.io
       http:
         paths:
-          - path: /*
+          - pathType: Prefix
+            path: /
             backend:
-              serviceName: notification-ui
-              servicePort: 80
+              service:
+                name: notification-ui
+                port:
+                  number: 80
