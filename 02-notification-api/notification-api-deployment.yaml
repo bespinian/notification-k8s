@@ -41,3 +41,10 @@ spec:
               port: 3000
             initialDelaySeconds: 5
             periodSeconds: 2
+          resources:
+            limits:
+              cpu: 100m
+              memory: 120M
+            requests:
+              cpu: 100m
+              memory: 120M
